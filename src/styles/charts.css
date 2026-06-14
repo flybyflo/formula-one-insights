@@ -1,0 +1,282 @@
+@layer components {
+  .race-lens {
+    width: min(100%, 760px);
+    height: auto;
+    margin: 1rem 0 0.35rem;
+    display: block;
+    color: var(--foreground);
+  }
+
+  .race-lens-large,
+  .race-lens-map {
+    margin-top: 1.6rem;
+  }
+
+  .race-lens text {
+    fill: currentColor;
+    font-size: 15px;
+    font-weight: 550;
+  }
+
+  .race-lens .compact-driver-labels text {
+    font-size: 10px;
+    font-weight: 650;
+  }
+
+  .interactive-chart {
+    cursor: crosshair;
+  }
+
+  .qatar-stack {
+    width: min(100%, 760px);
+    display: grid;
+    gap: 0.55rem;
+    margin-left: 0;
+    margin-top: 0.9rem;
+  }
+
+  .qatar-stack .race-lens {
+    width: min(calc(100% + 1rem), 776px);
+    margin: 0 0 0 -1rem;
+  }
+
+  .chart-bridge {
+    max-width: 64ch;
+    margin: 0.15rem 0 0.25rem;
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .top-position-chart {
+    width: min(calc(100% + 1rem), 776px);
+    height: auto;
+    margin-left: -1rem;
+    display: block;
+  }
+
+  .top-position-chart text {
+    fill: currentColor;
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .safety-car-call-map {
+    width: min(100%, 640px);
+    height: auto;
+    margin-top: 1.25rem;
+  }
+
+  .safety-car-map-title {
+    fill: var(--foreground);
+    font-size: 14px;
+    font-weight: 760;
+  }
+
+  .safety-car-map-subtitle,
+  .safety-car-map-label text {
+    fill: var(--muted-foreground);
+    font-size: 10px;
+    font-weight: 640;
+  }
+
+  .safety-car-track {
+    fill: none;
+    stroke: color-mix(in oklch, var(--foreground) 44%, transparent);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .safety-car-map-driver circle,
+  .safety-car-map-label circle {
+    stroke: var(--background);
+    stroke-width: 1.4;
+  }
+
+  .safety-car-pit-position path {
+    stroke: var(--foreground);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .grid-line {
+    stroke: currentColor;
+    stroke-opacity: 0.09;
+    stroke-width: 1;
+  }
+
+  .draw-path {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1200;
+    animation: draw-path 1.5s ease-out both;
+  }
+
+  .safety-car-band {
+    fill: #f43f5e;
+    opacity: 0.13;
+  }
+
+  .tyre-limit-safety-car-band {
+    opacity: 0.27;
+  }
+
+  .tyre-limit-safety-car-line {
+    stroke: #fb7185;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 5 5;
+  }
+
+  .tyre-window-band {
+    fill: #facc15;
+    opacity: 0.13;
+  }
+
+  .callout-label line {
+    stroke: color-mix(in oklch, var(--foreground) 54%, transparent);
+    stroke-width: 1.5;
+  }
+
+  .callout-label text {
+    fill: var(--foreground);
+    font-size: 11px;
+    font-weight: 680;
+  }
+
+  .panel-title text:first-child {
+    fill: var(--foreground);
+    font-size: 12px;
+    font-weight: 680;
+  }
+
+  .panel-title text:last-child {
+    fill: var(--muted-foreground);
+    font-size: 9.5px;
+    font-weight: 560;
+  }
+
+  .timing-grid line {
+    stroke: color-mix(in oklch, var(--foreground) 12%, transparent);
+    stroke-width: 1;
+  }
+
+  .timing-grid text,
+  .small-note {
+    fill: var(--muted-foreground);
+    font-size: 11px;
+    font-weight: 620;
+  }
+
+  .stint-bar {
+    stroke-width: 18;
+    stroke-linecap: round;
+    opacity: 0.84;
+  }
+
+  .pit-cut {
+    stroke: color-mix(in oklch, var(--foreground) 72%, transparent);
+    stroke-width: 2;
+    stroke-dasharray: 3 5;
+  }
+
+  .muted-baseline {
+    stroke: color-mix(in oklch, var(--foreground) 12%, transparent);
+    stroke-width: 1;
+  }
+
+  .limit-cap {
+    stroke: #ef4444;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .drs-line {
+    stroke: #ef4444;
+    stroke-width: 2;
+    stroke-dasharray: 7 6;
+    opacity: 0.76;
+  }
+
+  .race-lens .bump-driver-label {
+    font-size: 11px;
+    font-weight: 720;
+  }
+
+  .chart-hover-layer {
+    pointer-events: none;
+  }
+
+  .chart-hover-line {
+    stroke: var(--foreground);
+    stroke-width: 1.4;
+    stroke-dasharray: 3 5;
+    opacity: 0.72;
+  }
+
+  .chart-hover-dot {
+    stroke: var(--background);
+    stroke-width: 1.6;
+  }
+
+  .chart-hover-panel {
+    fill: color-mix(in oklch, var(--background) 90%, var(--foreground) 10%);
+    stroke: color-mix(in oklch, var(--foreground) 18%, transparent);
+    stroke-width: 1;
+  }
+
+  .chart-hover-title,
+  .chart-hover-label,
+  .chart-hover-value {
+    fill: var(--foreground);
+    font-size: 11px;
+    font-weight: 720;
+  }
+
+  .chart-hover-label,
+  .chart-hover-value {
+    fill: var(--muted-foreground);
+    font-weight: 680;
+  }
+}
+
+@keyframes draw-path {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draw-path {
+    animation: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .qatar-stack {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .qatar-stack .race-lens {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .top-position-chart {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .race-lens text {
+    font-size: 13px;
+  }
+}

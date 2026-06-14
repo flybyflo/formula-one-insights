@@ -1,0 +1,183 @@
+@layer components {
+  .journey-map {
+    width: min(100%, 660px);
+    margin: 0;
+    color: var(--foreground);
+  }
+
+  .journey-map svg {
+    width: 100%;
+    height: min(92svh, 1000px);
+    display: block;
+    overflow: visible;
+  }
+
+  .race-marker line {
+    stroke: currentColor;
+    stroke-opacity: 0.18;
+  }
+
+  .race-marker circle {
+    fill: var(--background);
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+
+  .race-marker.active circle {
+    fill: currentColor;
+  }
+
+  .race-marker text,
+  .map-legend text,
+  .active-race-label text {
+    fill: currentColor;
+    font-size: 14px;
+    font-weight: 560;
+  }
+
+  .race-marker .key-race-label {
+    fill: var(--muted-foreground);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .race-marker.active .key-race-label {
+    fill: var(--foreground);
+  }
+
+  .incident-glyph {
+    fill: #d44b4b;
+    opacity: 0.7;
+  }
+
+  .dnf-glyph {
+    fill: #0f172a;
+    opacity: 0.46;
+  }
+
+  .scroll-cursor {
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-dasharray: 4 7;
+    stroke-opacity: 0.42;
+  }
+
+  .qatar-lap-map .lap-map-title {
+    fill: var(--foreground);
+    font-size: 26px;
+    font-weight: 780;
+  }
+
+  .qatar-lap-map .lap-map-subtitle,
+  .qatar-lap-map .lap-map-callout,
+  .qatar-lap-map .lap-lane-label,
+  .qatar-lap-map .lap-axis text {
+    fill: var(--muted-foreground);
+    font-size: 13px;
+    font-weight: 660;
+  }
+
+  .qatar-lap-map .lap-lane-label {
+    fill: var(--foreground);
+  }
+
+  .qatar-lap-map .lap-axis line {
+    stroke: color-mix(in oklch, var(--foreground) 12%, transparent);
+    stroke-width: 1;
+  }
+
+  .qatar-lap-map .lap-time-axis line {
+    stroke: color-mix(in oklch, var(--foreground) 8%, transparent);
+    stroke-width: 1;
+  }
+
+  .qatar-lap-map .lap-time-axis text {
+    fill: var(--muted-foreground);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .qatar-lap-map .pit-callout line {
+    stroke: color-mix(in oklch, var(--foreground) 46%, transparent);
+    stroke-width: 1.5;
+  }
+
+  .qatar-lap-trace {
+    opacity: 0.92;
+  }
+
+  .qatar-lap-marker,
+  .qatar-pit-marker,
+  .step-dot {
+    transition:
+      fill 180ms ease,
+      opacity 180ms ease,
+      stroke 180ms ease;
+  }
+
+  .lap-progress-fill {
+    fill: color-mix(in oklch, var(--foreground) 5%, transparent);
+  }
+
+  .lap-progress-cursor {
+    stroke: var(--foreground);
+    stroke-width: 2;
+    stroke-dasharray: 5 7;
+    opacity: 0.72;
+  }
+
+  .qatar-hover-readout {
+    pointer-events: none;
+  }
+
+  .qatar-hover-line {
+    stroke: var(--foreground);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 5;
+    opacity: 0.78;
+  }
+
+  .qatar-hover-dot {
+    stroke: var(--background);
+    stroke-width: 1.5;
+  }
+
+  .qatar-hover-panel {
+    fill: color-mix(in oklch, var(--background) 88%, var(--foreground) 12%);
+    stroke: color-mix(in oklch, var(--foreground) 18%, transparent);
+    stroke-width: 1;
+  }
+
+  .qatar-hover-title,
+  .qatar-hover-lap,
+  .qatar-hover-driver,
+  .qatar-hover-time {
+    fill: var(--foreground);
+    font-size: 12px;
+    font-weight: 720;
+  }
+
+  .qatar-hover-driver,
+  .qatar-hover-time {
+    fill: var(--muted-foreground);
+    font-weight: 680;
+  }
+
+  .step-dot {
+    fill: var(--background);
+    stroke: var(--muted-foreground);
+    stroke-width: 2;
+  }
+
+  .step-dot.active {
+    fill: var(--foreground);
+    stroke: var(--foreground);
+  }
+}
+
+@media (max-width: 920px) {
+  .journey-map svg {
+    height: auto;
+    max-height: none;
+  }
+}

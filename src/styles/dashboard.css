@@ -1,0 +1,63 @@
+@layer components {
+  .missing-data h1 {
+    letter-spacing: 0;
+  }
+
+  .intro-copy,
+  .chapter,
+  .appendix {
+    border-bottom: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
+  }
+
+  .qatar-dashboard .chart-bridge {
+    color: var(--foreground);
+    font-size: 0.74rem;
+    line-height: 1.38;
+  }
+
+  .intro-copy p,
+  .chapter p,
+  .appendix p {
+    max-width: 660px;
+    color: var(--muted-foreground);
+    font-size: clamp(1rem, 1.6vw, 1.18rem);
+    line-height: 1.62;
+  }
+
+  .chapter h2,
+  .appendix h2 {
+    max-width: 760px;
+    font-size: clamp(2.1rem, 5vw, 5.4rem);
+    line-height: 0.94;
+    font-weight: 620;
+    letter-spacing: 0;
+  }
+
+  .appendix code,
+  .missing-data code {
+    padding: 0.1rem 0.35rem;
+    background: color-mix(in oklch, var(--foreground) 8%, transparent);
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  .appendix ul {
+    display: grid;
+    gap: 0.55rem;
+    color: var(--muted-foreground);
+  }
+
+  .missing-data {
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+    padding: clamp(2rem, 6vw, 6rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .missing-data h1 {
+    font-size: clamp(3rem, 17vw, 5rem);
+  }
+}
