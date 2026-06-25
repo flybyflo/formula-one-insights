@@ -48,6 +48,7 @@ type Grid = {
 type Lap = {
   driver_number: number
   lap_number: number
+  date_start?: string
   lap_duration?: number
   duration_sector_1?: number
   duration_sector_2?: number
@@ -422,8 +423,45 @@ function lapFromRaceStart(date: string, raceStart: string, lapCount: number) {
   return Math.max(1, Math.min(lapCount, approx))
 }
 
+function buildLapStarts(laps: Lap[]) {
+  const startByLap = new Map<number, number>()
+  for (const lap of laps) {
+    if (typeof lap.date_start !== "string") continue
+    const startMs = new Date(lap.date_start).getTime()
+    if (!Number.isFinite(startMs)) continue
+    const previous = startByLap.get(lap.lap_number)
+    if (previous === undefined || startMs < previous) {
+      startByLap.set(lap.lap_number, startMs)
+    }
+  }
+  return [...startByLap.entries()]
+    .map(([lap, startMs]) => ({ lap, startMs }))
+    .sort((a, b) => a.startMs - b.startMs)
+}
+
+function lapFromTimestamp(
+  date: string,
+  lapStarts: ReturnType<typeof buildLapStarts>,
+  raceStart: string,
+  lapCount: number
+) {
+  const dateMs = new Date(date).getTime()
+  if (!Number.isFinite(dateMs) || lapStarts.length === 0) {
+    return lapFromRaceStart(date, raceStart, lapCount)
+  }
+
+  let currentLap = lapStarts[0]!.lap
+  for (const lapStart of lapStarts) {
+    if (dateMs < lapStart.startMs) break
+    currentLap = lapStart.lap
+  }
+
+  return Math.max(1, Math.min(lapCount, currentLap))
+}
+
 function buildPositionSeries(
   positions: Position[],
+  lapStarts: ReturnType<typeof buildLapStarts>,
   raceStart: string,
   lapCount: number
 ): PositionSample[] {
@@ -435,20 +473,21 @@ function buildPositionSeries(
     )
     .map((position) => ({
       driver: DRIVER_KEYS[position.driver_number],
-      lap: lapFromRaceStart(position.date, raceStart, lapCount),
+      lap: lapFromTimestamp(position.date, lapStarts, raceStart, lapCount),
       position: position.position!,
     }))
 }
 
 function buildGapSeries(
   intervals: Interval[],
+  lapStarts: ReturnType<typeof buildLapStarts>,
   raceStart: string,
   lapCount: number
 ) {
   return intervals
     .filter((interval) => TOP_DRIVER_NUMBERS.includes(interval.driver_number))
     .map((interval) => ({
-      lap: lapFromRaceStart(interval.date, raceStart, lapCount),
+      lap: lapFromTimestamp(interval.date, lapStarts, raceStart, lapCount),
       driver: DRIVER_KEYS[interval.driver_number],
       interval: numericGap(interval.interval),
       gapToLeader: numericGap(interval.gap_to_leader),
@@ -756,6 +795,7 @@ async function main() {
       ),
       1
     )
+    const lapStarts = buildLapStarts(laps)
 
     races.push({
       round: index + 1,
@@ -796,10 +836,16 @@ async function main() {
             pitStops: buildPitStops(pit, lapsByDriver),
             positionSeries: buildPositionSeries(
               positions,
+              lapStarts,
               session.date_start,
               lapCount
             ),
-            gapSeries: buildGapSeries(intervals, session.date_start, lapCount),
+            gapSeries: buildGapSeries(
+              intervals,
+              lapStarts,
+              session.date_start,
+              lapCount
+            ),
             circuitMap:
               keyRace.visualType === "circuit-map"
                 ? buildCircuitMap(
